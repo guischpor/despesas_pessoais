@@ -13,18 +13,32 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Despesas Pessoais'),
         backgroundColor: Colors.purple,
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            child: Card(
-              child: Text('Gráfico'),
-            ),
-          ),
-          TransactionUser(),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {},
+          )
         ],
       ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              child: Card(
+                child: Text('Gráfico'),
+              ),
+            ),
+            TransactionUser(),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.purple,
+        child: Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
