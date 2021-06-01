@@ -2,19 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/transaction.dart';
 
-class TransactionList extends StatelessWidget {
+class TransactionList extends StatefulWidget {
   final List<Transaction> transactions;
 
   TransactionList(this.transactions);
 
   @override
+  _TransactionListState createState() => _TransactionListState();
+}
+
+class _TransactionListState extends State<TransactionList> {
+  @override
   Widget build(BuildContext context) {
     return Container(
       height: 300,
       child: ListView.builder(
-        itemCount: transactions.length,
+        itemCount: widget.transactions.length,
         itemBuilder: (context, index) {
-          final tr = transactions[index];
+          final tr = widget.transactions[index];
           return Card(
             child: Row(
               children: [
