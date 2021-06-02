@@ -10,24 +10,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _transactions = [
+  final List<Transaction> _transactions = [
     Transaction(
       id: 't1',
       title: 'Placa Mãe Asus b250m v7',
       value: 450.85,
-      date: DateTime.now(),
+      date: DateTime.now().subtract(Duration(days: 3)),
     ),
     Transaction(
       id: 't2',
       title: 'SSD 64 gb',
       value: 84.17,
-      date: DateTime.now(),
+      date: DateTime.now().subtract(Duration(days: 4)),
     ),
     Transaction(
       id: 't3',
       title: 'Cooler RGB 120mm',
       value: 143.48,
-      date: DateTime.now(),
+      date: DateTime.now().subtract(Duration(days: 15)),
     ),
   ];
 

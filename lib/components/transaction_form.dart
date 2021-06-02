@@ -56,7 +56,12 @@ class _TransactionFormState extends State<TransactionForm> {
                 Container(
                   width: double.infinity,
                   child: RaisedButton(
-                    child: Text('Nova Transação'),
+                    child: Text(
+                      'Nova Transação',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     textColor: Colors.white,
                     color: Colors.purple,
                     onPressed: _submitForm,
