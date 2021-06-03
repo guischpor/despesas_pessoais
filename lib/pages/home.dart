@@ -1,3 +1,4 @@
+import 'package:despesas_pessoais/components/chart.dart';
 import 'package:despesas_pessoais/components/transaction_form.dart';
 import 'package:despesas_pessoais/components/transaction_list.dart';
 import 'package:despesas_pessoais/models/transaction.dart';
@@ -11,6 +12,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final List<Transaction> _transactions = [
+    Transaction(
+      id: 't0',
+      title: 'Conta de Luz',
+      value: 150.05,
+      date: DateTime.now().subtract(Duration(days: 42)),
+    ),
     Transaction(
       id: 't1',
       title: 'Placa Mãe Asus b250m v7',
@@ -30,6 +37,15 @@ class _HomeScreenState extends State<HomeScreen> {
       date: DateTime.now().subtract(Duration(days: 15)),
     ),
   ];
+
+  //funcao que busca as transações mais recentes
+  List<Transaction> get _recentTransactions {
+    return _transactions.where((tr) {
+      return tr.date.isAfter(DateTime.now().subtract(
+        Duration(days: 7),
+      ));
+    }).toList();
+  }
 
   _addTransaction(String title, double value) {
     final newTransaction = Transaction(
@@ -76,11 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              child: Card(
-                child: Text('Gráfico'),
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_transactions),
           ],
         ),
