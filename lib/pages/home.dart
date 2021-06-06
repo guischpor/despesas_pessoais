@@ -36,6 +36,18 @@ class _HomeScreenState extends State<HomeScreen> {
       value: 143.48,
       date: DateTime.now().subtract(Duration(days: 15)),
     ),
+    Transaction(
+      id: 't4',
+      title: 'Boleto Luz',
+      value: 100075.00,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't5',
+      title: 'Agua Casa',
+      value: 65.13,
+      date: DateTime.now(),
+    ),
   ];
 
   //funcao que busca as transações mais recentes
@@ -47,12 +59,12 @@ class _HomeScreenState extends State<HomeScreen> {
     }).toList();
   }
 
-  _addTransaction(String title, double value) {
+  _addTransaction(String title, double value, DateTime date) {
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
       value: value,
-      date: DateTime.now(),
+      date: date,
     );
 
     setState(() {
@@ -60,6 +72,12 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     Navigator.of(context).pop();
+  }
+
+  _deleteTrasactions(String id) {
+    setState(() {
+      _transactions.removeWhere((tr) => tr.id == id);
+    });
   }
 
   _openTransactionFormModal(BuildContext context) {
@@ -93,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Chart(_recentTransactions),
-            TransactionList(_transactions),
+            TransactionList(_transactions, _deleteTrasactions),
           ],
         ),
       ),
