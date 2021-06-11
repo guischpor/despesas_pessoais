@@ -12,43 +12,45 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final List<Transaction> _transactions = [
-    Transaction(
-      id: 't0',
-      title: 'Conta de Luz',
-      value: 150.05,
-      date: DateTime.now().subtract(Duration(days: 42)),
-    ),
-    Transaction(
-      id: 't1',
-      title: 'Placa Mãe Asus b250m v7',
-      value: 450.85,
-      date: DateTime.now().subtract(Duration(days: 3)),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'SSD 64 gb',
-      value: 84.17,
-      date: DateTime.now().subtract(Duration(days: 4)),
-    ),
-    Transaction(
-      id: 't3',
-      title: 'Cooler RGB 120mm',
-      value: 143.48,
-      date: DateTime.now().subtract(Duration(days: 15)),
-    ),
-    Transaction(
-      id: 't4',
-      title: 'Boleto Luz',
-      value: 100075.00,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't5',
-      title: 'Agua Casa',
-      value: 65.13,
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   id: 't0',
+    //   title: 'Conta de Luz',
+    //   value: 150.05,
+    //   date: DateTime.now().subtract(Duration(days: 42)),
+    // ),
+    // Transaction(
+    //   id: 't1',
+    //   title: 'Placa Mãe Asus b250m v7',
+    //   value: 450.85,
+    //   date: DateTime.now().subtract(Duration(days: 3)),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'SSD 64 gb',
+    //   value: 84.17,
+    //   date: DateTime.now().subtract(Duration(days: 4)),
+    // ),
+    // Transaction(
+    //   id: 't3',
+    //   title: 'Cooler RGB 120mm',
+    //   value: 143.48,
+    //   date: DateTime.now().subtract(Duration(days: 15)),
+    // ),
+    // Transaction(
+    //   id: 't4',
+    //   title: 'Boleto Luz',
+    //   value: 100075.00,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't5',
+    //   title: 'Agua Casa',
+    //   value: 65.13,
+    //   date: DateTime.now(),
+    // ),
   ];
+
+  bool _showChart = false;
 
   //funcao que busca as transações mais recentes
   List<Transaction> get _recentTransactions {
@@ -93,25 +95,58 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Despesas Pessoais',
-        ),
-        backgroundColor: Colors.purple,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => _openTransactionFormModal(context),
-          )
-        ],
+    final appBar = AppBar(
+      title: Text(
+        'Despesas Pessoais',
       ),
+      backgroundColor: Colors.purple,
+      actions: [
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () => _openTransactionFormModal(context),
+        )
+      ],
+    );
+
+    //metodo pega a altura disponivel da tela, e desconta a altura do appBar e padding top
+    //assim conseguimos utilizar os 100% da tela!
+    final availbleHeight = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
+
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Chart(_recentTransactions),
-            TransactionList(_transactions, _deleteTrasactions),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Exibir Gráfico'),
+                Switch(
+                  value: _showChart,
+                  onChanged: (value) {
+                    setState(() {
+                      _showChart = value;
+                    });
+                  },
+                ),
+              ],
+            ),
+            if (_showChart)
+              Container(
+                height: availbleHeight * 0.28,
+                child: Chart(_recentTransactions),
+              ),
+            if (!_showChart)
+              Container(
+                height: availbleHeight * 0.72,
+                child: TransactionList(
+                  _transactions,
+                  _deleteTrasactions,
+                ),
+              ),
           ],
         ),
       ),
