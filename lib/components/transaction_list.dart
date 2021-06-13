@@ -21,21 +21,18 @@ class _TransactionListState extends State<TransactionList> {
               return Column(
                 children: [
                   SizedBox(
-                    height: constraints.maxHeight * 0.05,
+                    height: 20,
                   ),
-                  Container(
-                    height: constraints.maxHeight * 0.3,
-                    child: Text(
-                      'Nenhuma Transação Cadastrada!',
-                      style: TextStyle(
-                        fontFamily: 'OpenSans',
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  Text(
+                    'Nenhuma Transação Cadastrada!',
+                    style: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(
-                    height: constraints.maxHeight * 0.05,
+                    height: 20,
                   ),
                   Image(
                     image: AssetImage(
