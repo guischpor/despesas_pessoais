@@ -72,11 +72,18 @@ class _TransactionListState extends State<TransactionList> {
                   subtitle: Text(
                     DateFormat('d MM y').format(tr.date),
                   ),
-                  trailing: IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () => widget.onRemove(tr.id),
-                    color: Theme.of(context).errorColor,
-                  ),
+                  trailing: MediaQuery.of(context).size.width > 400
+                      ? FlatButton.icon(
+                          icon: Icon(Icons.delete),
+                          label: Text('Excluir'),
+                          textColor: Colors.purple,
+                          onPressed: () => widget.onRemove(tr.id),
+                        )
+                      : IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () => widget.onRemove(tr.id),
+                          color: Theme.of(context).errorColor,
+                        ),
                 ),
               );
             },

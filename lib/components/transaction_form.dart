@@ -1,3 +1,4 @@
+import 'package:despesas_pessoais/components/adaptative_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -47,10 +48,11 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+
     return SingleChildScrollView(
       child: Padding(
-        padding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        padding: EdgeInsets.only(bottom: mediaQuery.viewInsets.bottom),
         child: Card(
           elevation: 5,
           child: Padding(
@@ -96,19 +98,12 @@ class _TransactionFormState extends State<TransactionForm> {
                   ),
                 ),
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  //mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       width: double.infinity,
-                      child: RaisedButton(
-                        child: Text(
-                          'Nova Transação',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        textColor: Colors.white,
-                        color: Colors.purple,
+                      child: AdaptativeButton(
+                        label: 'Nova Transação',
                         onPressed: _submitForm,
                       ),
                     ),
