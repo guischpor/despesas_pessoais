@@ -1,5 +1,6 @@
 import 'package:despesas_pessoais/pages/home.dart';
 import 'package:flutter/material.dart';
+//import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,6 +9,13 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //metodo em que vc pode escolher se o app pode funcionar em horizontal ou vertical
+    // SystemChrome.setPreferredOrientations(
+    //   [
+    //     DeviceOrientation.portraitUp,
+    //   ],
+    // );
+
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.purple,
