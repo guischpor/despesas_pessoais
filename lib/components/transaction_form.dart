@@ -32,6 +32,7 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
+    print('build() TransactionForm');
     final mediaQuery = MediaQuery.of(context);
 
     return SingleChildScrollView(
