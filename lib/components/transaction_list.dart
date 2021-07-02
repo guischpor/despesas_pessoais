@@ -16,7 +16,6 @@ class TransactionList extends StatefulWidget {
 class _TransactionListState extends State<TransactionList> {
   @override
   Widget build(BuildContext context) {
-    print('build() TransactionList');
     return widget.transactions.isEmpty
         ? LayoutBuilder(
             builder: (context, constraints) {
