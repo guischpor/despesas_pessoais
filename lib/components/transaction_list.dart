@@ -46,11 +46,23 @@ class _TransactionListState extends State<TransactionList> {
               );
             },
           )
-        : ListView.builder(
+        :
+        // ListView(
+        //     children: widget.transactions.map((tr) {
+        //       return TransactionItem(
+        //         key: ValueKey(tr.id),
+        //         tr: tr,
+        //         onRemove: widget.onRemove,
+        //       );
+        //     }).toList(),
+        //   );
+
+        ListView.builder(
             itemCount: widget.transactions.length,
             itemBuilder: (context, index) {
               final tr = widget.transactions[index];
               return TransactionItem(
+                key: GlobalObjectKey(tr),
                 tr: tr,
                 onRemove: widget.onRemove,
               );
